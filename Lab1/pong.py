@@ -3,12 +3,10 @@ import sys
 
 pygame.init()
 
-# Window setup
 WIDTH, HEIGHT = 800, 400
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Pong")
 
-# Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
@@ -19,10 +17,9 @@ right_paddle = pygame.Rect(WIDTH - 30, HEIGHT//2 - paddle_height//2, paddle_widt
 
 # Ball setup
 ball = pygame.Rect(WIDTH//2 - 7, HEIGHT//2 - 7, 15, 15)
-ball_speed_x = 4
-ball_speed_y = 4
+ball_speed_x = 50
+ball_speed_y = 50
 
-# Score
 score_left = 0
 score_right = 0
 font = pygame.font.Font(None, 50)
@@ -30,13 +27,11 @@ font = pygame.font.Font(None, 50)
 clock = pygame.time.Clock()
 
 while True:
-    # Quit handler
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
 
-    # Paddle Movement
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_w] and left_paddle.top > 0:
@@ -57,16 +52,16 @@ while True:
     if ball.top <= 0 or ball.bottom >= HEIGHT:
         ball_speed_y *= -1
 
-    # Paddle Collision (Fixed)
+    # Paddle Collision 
     if ball.colliderect(left_paddle):
         ball_speed_x = abs(ball_speed_x)  # ensure moves right
-        ball_speed_y += (ball.centery - left_paddle.centery) * 0.03
+        ball_speed_y += (ball.centery - left_paddle.centery) * 0.3
 
     if ball.colliderect(right_paddle):
         ball_speed_x = -abs(ball_speed_x)  # ensure moves left
-        ball_speed_y += (ball.centery - right_paddle.centery) * 0.03
+        ball_speed_y += (ball.centery - right_paddle.centery) * 0.3
 
-    # Scoring (Reset only when fully offscreen)
+    # Scoring 
     if ball.x < -20:
         score_right += 1
         ball.center = (WIDTH//2, HEIGHT//2)
@@ -77,10 +72,8 @@ while True:
         ball.center = (WIDTH//2, HEIGHT//2)
         ball_speed_x *= -1
 
-    # Draw everything
     screen.fill(BLACK)
 
-    # Middle dashed line
     for i in range(0, HEIGHT, 20):
         pygame.draw.rect(screen, WHITE, (WIDTH//2 - 2, i, 4, 10))
 
@@ -88,7 +81,6 @@ while True:
     pygame.draw.rect(screen, WHITE, right_paddle)
     pygame.draw.ellipse(screen, WHITE, ball)
 
-    # Draw scores
     score_text = font.render(f"{score_left}   {score_right}", True, WHITE)
     screen.blit(score_text, (WIDTH//2 - 50, 20))
 
