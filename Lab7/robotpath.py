@@ -40,7 +40,7 @@ class PathPlanningVisualizer:
         self.cell_size = cell_size
         self.grid = [[0 for _ in range(grid_size)] for _ in range(grid_size)]
 
-        # Start and goal positions (Inferred as sources cut off after this comment)
+        # Start and goal positions
         self.start = (0, 0)
         self.goal = (grid_size - 1, grid_size - 1)
 
@@ -359,7 +359,6 @@ class PathPlanningVisualizer:
 
         return False
 
-# Main Execution (Standard boilerplate to run the class)
 if __name__ == "__main__":
     root = tk.Tk()
     app = PathPlanningVisualizer(root)
