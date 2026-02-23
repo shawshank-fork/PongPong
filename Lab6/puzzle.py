@@ -15,7 +15,7 @@ class PuzzleState:
 
 # Function to display the board in a visually appealing format
 def print_board(board):
-    print("+---+---+---+")
+    print("---------")
     for row in range(0, 9, 3):
         row_visual = "|"
         for tile in board[row:row + 3]:
@@ -24,7 +24,7 @@ def print_board(board):
             else:
                 row_visual += f" {colored(str(tile), 'yellow')} |"
         print(row_visual)
-        print("+---+---+---+")
+        print("---------")
 
 # Goal state for the puzzle
 goal_state = [1, 2, 3, 4, 5, 6, 7, 8, 0]
@@ -37,7 +37,7 @@ moves = {
     'R': 1    # Move right
 }
 
-# Function to calculate the heuristic (Manhattan distance)
+# Function to calculate the heuristic using Manhattan distance
 def heuristic(board):
     distance = 0
     for i in range(9):
