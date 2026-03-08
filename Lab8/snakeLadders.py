@@ -2,9 +2,6 @@ import tkinter as tk
 import random
 import time
 
-# ======================
-# THEME
-# ======================
 BG = "#0F172A"
 BOARD_LIGHT = "#E2E8F0"
 BOARD_DARK = "#CBD5E1"
@@ -13,9 +10,6 @@ AI_COLOR = "#22D3EE"
 BTN_COLOR = "#10B981"
 TEXT_COLOR = "#E2E8F0"
 
-# ======================
-# GAME CLASS
-# ======================
 class SnakeLadderGame:
     def __init__(self):
         self.snakes = {16:6, 47:26, 49:11, 56:53, 62:19,
@@ -23,9 +17,6 @@ class SnakeLadderGame:
         self.ladders = {1:38, 4:14, 9:31, 21:42,
                         28:84, 36:44, 51:67, 71:91, 80:100}
 
-# ======================
-# MAIN GUI
-# ======================
 class FullGameGUI:
     def __init__(self, root):
         self.root = root
@@ -42,9 +33,6 @@ class FullGameGUI:
         self.setup_ui()
         self.draw_board()
 
-    # -------------------
-    # UI
-    # -------------------
     def setup_ui(self):
         self.canvas = tk.Canvas(self.root, width=600, height=600,
                                 bg="white", highlightthickness=0)
@@ -66,9 +54,6 @@ class FullGameGUI:
                                   command=self.roll_dice)
         self.roll_btn.pack(pady=10)
 
-    # -------------------
-    # BOARD
-    # -------------------
     def draw_board(self):
         size = 60
         for i in range(10):
@@ -196,9 +181,6 @@ class FullGameGUI:
         x,y = self.get_coords(pos)
         self.canvas.coords(token, x-10, y-10, x+10, y+10)
 
-    # -------------------
-    # GAME LOGIC
-    # -------------------
     def roll_dice(self):
         if self.current_turn != "PLAYER":
             return
@@ -255,12 +237,6 @@ class FullGameGUI:
             return target
 
         return new_pos
-
-
-
-    # -------------------
-    # ANIMATIONS
-    # -------------------
 
     def animate_special_move(self, token, start_pos, end_pos, climb=True):
         x1, y1 = self.get_coords(start_pos)
