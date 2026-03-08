@@ -13,7 +13,7 @@ class PuzzleState:
     def __lt__(self, other):
         return self.cost < other.cost
 
-# Function to display the board in a visually appealing format
+# Function to display the board
 def print_board(board):
     print("---------")
     for row in range(0, 9, 3):
